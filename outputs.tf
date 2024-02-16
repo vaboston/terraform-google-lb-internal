@@ -97,5 +97,4 @@ output "health_check_types" {
     https = [for idx, check in google_compute_health_check.https : check.type]
   }
   description = "The type of the health check. One of HTTP, HTTPS, TCP, or SSL."
-
 }

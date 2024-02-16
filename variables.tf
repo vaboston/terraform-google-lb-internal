@@ -31,7 +31,7 @@ variable "repository" {
 variable "region" {
   description = "Region for cloud resources."
   type        = string
-  default     = "us-central1"
+  default     = ""
 }
 
 variable "global_access" {

@@ -72,7 +72,6 @@ output "health_check_ids" {
   description = "An array of identifiers for the TCP, HTTP, and HTTPS health check resources."
 }
 
-
 output "health_check_creation_timestamp" {
   value = {
     tcp   = module.test_lb.health_check_creation_timestamp

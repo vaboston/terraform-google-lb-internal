@@ -11,6 +11,9 @@ module "labels" {
 data "google_client_config" "current" {
 }
 
+#####==============================================================================
+##### A ForwardingRule resource.
+#####==============================================================================
 resource "google_compute_forwarding_rule" "default" {
   project               = data.google_client_config.current.project
   name                  = var.name
@@ -28,6 +31,10 @@ resource "google_compute_forwarding_rule" "default" {
   labels                = var.labels
 }
 
+#####==============================================================================
+##### A Region Backend Service defines a regionally-scoped group of virtual machines
+##### that will serve traffic for load balancing.
+#####==============================================================================
 resource "google_compute_region_backend_service" "default" {
   project = data.google_client_config.current.project
   name = {
@@ -52,6 +59,9 @@ resource "google_compute_region_backend_service" "default" {
   health_checks = concat(google_compute_health_check.tcp[*].self_link, google_compute_health_check.http[*].self_link, google_compute_health_check.https[*].self_link)
 }
 
+#####==============================================================================
+##### Health Checks determine whether instances are responsive and able to do work.
+#####==============================================================================
 resource "google_compute_health_check" "tcp" {
   provider = google-beta
   count    = var.health_check["type"] == "tcp" ? 1 : 0
@@ -79,6 +89,9 @@ resource "google_compute_health_check" "tcp" {
   }
 }
 
+#####==============================================================================
+##### Health Checks determine whether instances are responsive and able to do work.
+#####==============================================================================
 resource "google_compute_health_check" "http" {
   provider = google-beta
   count    = var.health_check["type"] == "http" ? 1 : 0
@@ -107,6 +120,9 @@ resource "google_compute_health_check" "http" {
   }
 }
 
+#####==============================================================================
+##### Health Checks determine whether instances are responsive and able to do work.
+#####==============================================================================
 resource "google_compute_health_check" "https" {
   provider = google-beta
   count    = var.health_check["type"] == "https" ? 1 : 0
@@ -159,7 +175,7 @@ resource "google_compute_firewall" "default-ilb-fw" {
     }
   }
 }
-
+#tfsec:ignore:google-compute-no-public-ingress
 resource "google_compute_firewall" "default-hc" {
   count   = var.create_health_check_firewall ? 1 : 0
   project = data.google_client_config.current.project == "" ? data.google_client_config.current.project : data.google_client_config.current.project

@@ -73,7 +73,7 @@ module "gce-ilb" {
 You can customize the input variables according to your specific requirements.
 
 ## Examples
-For detailed examples on how to use this module, please refer to the [Examples](https://github.com/cypik/terraform-google-lb-internal/tree/master/_example) directory within this repository.
+For detailed examples on how to use this module, please refer to the [Examples](https://github.com/cypik/terraform-google-lb-internal/tree/master/examples) directory within this repository.
 
 ## Author
 Your Name Replace **MIT** and **Cypik** with the appropriate license and your information. Feel free to expand this README with additional details or usage instructions as needed for your specific use case.
@@ -137,7 +137,7 @@ This project is licensed under the **MIT** License - see the [LICENSE](https://g
 | <a name="input_name"></a> [name](#input\_name) | Name of the resource. Provided by the client when the resource is created. | `string` | `""` | no |
 | <a name="input_network"></a> [network](#input\_network) | Name of the network to create resources in. | `string` | `""` | no |
 | <a name="input_ports"></a> [ports](#input\_ports) | List of ports range to forward to backend services. Max is 5. | `list(string)` | n/a | yes |
-| <a name="input_region"></a> [region](#input\_region) | Region for cloud resources. | `string` | `"us-central1"` | no |
+| <a name="input_region"></a> [region](#input\_region) | Region for cloud resources. | `string` | `""` | no |
 | <a name="input_repository"></a> [repository](#input\_repository) | Terraform current module repo | `string` | `"https://github.com/cypik/terraform-google-lb-internal"` | no |
 | <a name="input_service_label"></a> [service\_label](#input\_service\_label) | Service label is used to create internal DNS name | `string` | `null` | no |
 | <a name="input_session_affinity"></a> [session\_affinity](#input\_session\_affinity) | The session affinity for the backends example: NONE, CLIENT\_IP. Default is `NONE`. | `string` | `"NONE"` | no |

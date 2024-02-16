@@ -1,4 +1,6 @@
-
+#####==============================================================================
+##### instance_template module call.
+#####==============================================================================
 module "instance_template" {
   source               = "cypik/template-instance/google"
   version              = "1.0.1"
@@ -19,12 +21,11 @@ module "instance_template" {
       dev:ssh-rsa AAAAB3NzaC1yc2EAA/3mwt2y+PDQMU= suresh@suresh
     EOF
   }
-  #startup_script     = templatefile("${path.module}/nginx_upstream.sh.tpl", { UPSTREAM = module.gce-ilb.ip_address })
-  #  tags               = ["allow-group"]
 }
 
-
-
+#####==============================================================================
+##### instance_group module call.
+#####==============================================================================
 module "instance_group" {
   source              = "cypik/instance-group/google"
   version             = "1.0.1"
@@ -47,4 +48,3 @@ module "instance_group" {
     port = 80
   }]
 }
-

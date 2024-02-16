@@ -4,16 +4,7 @@ provider "google" {
   zone    = "asia-northeast1-a"
 }
 
-#resource "random_string" "suffix" {
-#  length  = 8
-#  upper   = false
-#  lower   = true
-#  numeric = true
-#  special = false
-#}
-
 locals {
-  #  random_suffix = random_string.suffix.result
   resource_name = "lb-minimal"
   health_check = {
     type                = "http"
@@ -57,6 +48,7 @@ module "subnet" {
   network       = module.vpc.vpc_id
   ip_cidr_range = ["10.10.1.0/24"]
 }
+
 #####==============================================================================
 ##### firewall module call.
 #####==============================================================================
@@ -75,6 +67,9 @@ module "firewall" {
   ]
 }
 
+#####==============================================================================
+##### test_lb module call.
+#####==============================================================================
 module "test_lb" {
   source       = "../../"
   network      = module.vpc.vpc_id

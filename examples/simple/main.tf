@@ -3,7 +3,10 @@ provider "google" {
   region  = "asia-northeast1"
   zone    = "asia-northeast1-a"
 }
-#
+
+#####==============================================================================
+##### load_balancer module call.
+#####==============================================================================
 module "load_balancer" {
   source                  = "cypik/lb/google"
   version                 = "1.0.1"
@@ -18,6 +21,9 @@ module "load_balancer" {
   service_port            = local.named_ports[0].port
 }
 
+#####==============================================================================
+##### gce_ilb module call.
+#####==============================================================================
 module "gce_ilb" {
   source       = "../../"
   region       = "asia-northeast1"
