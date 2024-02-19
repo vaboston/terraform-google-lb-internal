@@ -72,10 +72,11 @@ module "firewall" {
 #####==============================================================================
 module "test_lb" {
   source       = "../../"
+  name         = local.resource_name
+  environment  = "test"
+  region       = "asia-northeast1"
   network      = module.vpc.vpc_id
   subnetwork   = module.subnet.subnet_id
-  region       = "asia-northeast1"
-  name         = local.resource_name
   ports        = ["8080"]
   source_tags  = ["source-tag-foo"]
   target_tags  = ["target-tag-bar"]
