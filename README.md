@@ -16,7 +16,7 @@ This project deploys a Google Cloud infrastructure using Terraform to create lb-
 To use this module, you should have Terraform installed and configured for GCP. This module provides the necessary Terraform configuration for creating GCP resources, and you can customize the inputs as needed. Below is an example of how to use this module:
 ## Examples
 
-# Example: internal
+# Example: lb_internal
 ```hcl
 module "lb_internal" {
   source       = "cypik/lb-internal/google"
@@ -33,7 +33,7 @@ module "lb_internal" {
   health_check = local.health_check
 }
 ```
-# Example: simple
+# Example: lb_internal_external
 ```hcl
 module "load_balancer" {
   source                  = "cypik/lb/google"
@@ -49,10 +49,10 @@ module "load_balancer" {
   service_port            = local.named_ports[0].port
 }
 
-module "lb_internal" {
+module "lb_internal_external" {
   source       = "cypik/lb-internal/google"
   version      = "1.0.0"
-  name         = "lb_internal"
+  name         = "lb-internal-external"
   environment  = "test"
   network      = module.vpc.self_link
   subnetwork   = module.subnet.subnet_self_link

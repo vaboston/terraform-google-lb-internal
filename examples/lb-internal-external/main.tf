@@ -4,6 +4,28 @@ provider "google" {
   zone    = "asia-northeast1-a"
 }
 
+locals {
+  named_ports = [{
+    name = "http"
+    port = 80
+  }]
+  health_check = {
+    type                = "http"
+    check_interval_sec  = 1
+    healthy_threshold   = 4
+    timeout_sec         = 1
+    unhealthy_threshold = 5
+    response            = ""
+    proxy_header        = "NONE"
+    port                = 80
+    port_name           = "health-check-port"
+    request             = ""
+    request_path        = "/"
+    host                = "1.2.3.4"
+    enable_log          = false
+  }
+}
+
 #####==============================================================================
 ##### vpc module call.
 #####==============================================================================
@@ -117,12 +139,12 @@ module "load_balancer" {
 }
 
 #####==============================================================================
-##### lb_internal module call.
+##### lb-internal-external module call.
 #####==============================================================================
-module "lb_internal" {
+module "lb_internal_external" {
   source       = "../../"
   region       = "asia-northeast1"
-  name         = "lb_internal"
+  name         = "lb-internal-external"
   environment  = "test"
   network      = module.vpc.self_link
   subnetwork   = module.subnet.subnet_self_link
