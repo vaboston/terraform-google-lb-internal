@@ -68,9 +68,9 @@ module "firewall" {
 }
 
 #####==============================================================================
-##### test_lb module call.
+##### lb_internal module call.
 #####==============================================================================
-module "test_lb" {
+module "lb_internal" {
   source       = "../../"
   name         = local.resource_name
   environment  = "test"

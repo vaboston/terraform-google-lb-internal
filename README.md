@@ -18,7 +18,7 @@ To use this module, you should have Terraform installed and configured for GCP. 
 
 # Example: internal
 ```hcl
-module "test_lb" {
+module "lb_internal" {
   source       = "cypik/lb-internal/google"
   version      = "1.0.0"
   name         = local.resource_name
@@ -49,12 +49,11 @@ module "load_balancer" {
   service_port            = local.named_ports[0].port
 }
 
-module "gce-ilb" {
+module "lb_internal" {
   source       = "cypik/lb-internal/google"
   version      = "1.0.0"
-  name         = "group-ilb"
+  name         = "lb_internal"
   environment  = "test"
-  region       = "asia-northeast1"
   network      = module.vpc.self_link
   subnetwork   = module.subnet.subnet_self_link
   ports        = [local.named_ports[0].port]
